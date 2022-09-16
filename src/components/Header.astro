@@ -3,30 +3,41 @@ import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../config";
 ---
 
-<header>
-  <h2>
+<h2 class="text-gray-200 text-4xl text-center font-extrabold my-6">
+  <a href="/">
     {SITE_TITLE}
-  </h2>
-  <nav>
-    <HeaderLink href="/">Home</HeaderLink>
-    <HeaderLink href="/blog">Blog</HeaderLink>
-    <HeaderLink href="/about">About</HeaderLink>
-    <HeaderLink href="https://twitter.com/cambeattydev" target="_blank"
-      >Twitter</HeaderLink
-    >
-    <HeaderLink href="https://www.linkedin.com/in/cambeatty" target="_blank"
-      >LinkedIn</HeaderLink
-    >
-    <HeaderLink href="https://github.com/cambeattydev" target="_blank"
-      >GitHub</HeaderLink
-    >
-  </nav>
-</header>
-<style>
-  header {
-    margin: 0em 0 2em;
-  }
-  h2 {
-    margin: 0.5em 0;
-  }
-</style>
+  </a>
+</h2>
+<nav
+  class="w-full bg-slate-600 py-5 text-center mb-4 text-blue-300 sticky top-[-1px] shadow-md"
+>
+  <HeaderLink id="home-link" class="px-5 hidden" href="/">Home</HeaderLink>
+  <HeaderLink class="px-5" href="/blog">Blog</HeaderLink>
+  <HeaderLink class="px-5" href="/about">About</HeaderLink>
+  <HeaderLink
+    class="px-5"
+    href="https://twitter.com/cambeattydev"
+    target="_blank">Twitter</HeaderLink
+  >
+  <HeaderLink
+    class="px-5"
+    href="https://www.linkedin.com/in/cambeatty"
+    target="_blank">LinkedIn</HeaderLink
+  >
+  <HeaderLink
+    class="px-5"
+    href="https://github.com/cambeattydev"
+    target="_blank">GitHub</HeaderLink
+  >
+</nav>
+<script>
+  var observer = new IntersectionObserver(
+    ([elem]) => {
+      elem.intersectionRatio < 1
+        ? document.getElementById("home-link")!.classList.remove("hidden")
+        : document.getElementById("home-link")!.classList.add("hidden");
+    },
+    { threshold: [1] }
+  );
+  observer.observe(document.querySelector("nav")!);
+</script>
