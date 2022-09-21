@@ -1,7 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import BaseLayout from "./BaseLayout.astro";
 
 export interface Props {
   content: {
@@ -18,56 +17,47 @@ const {
 } = Astro.props;
 ---
 
-<html lang="en">
-  <head>
-    <BaseHead title={title} description={description} />
-    <style>
-      .title {
-        font-size: 2em;
-        margin: 0.25em 0 0;
-      }
-      hr {
-        border-top: 1px solid #ddd;
-        margin: 1rem 0;
-      }
-    </style>
-  </head>
+<BaseHead title={title} description={description} />
+<BaseLayout>
+  <style>
+    hr {
+      border-top: 1px solid #ddd;
+      margin: 1rem 0;
+    }
+  </style>
 
-  <body>
-    <Header />
-    <main>
-      <article>
-        {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-        <h1 class="title">{title}</h1>
-        {pubDate && <time>{pubDate}</time>}
-        {
-          updatedDate && (
-            <div>
-              Last updated on <time>{updatedDate}</time>
-            </div>
-          )
-        }
-        <hr />
-        <slot />
-      </article>
-    </main>
-    <section>
+  <main class="flex-none content-center pt-8">
+    <article class="container m-auto">
       {
-        tags && tags.length > 0 && (
+        heroImage && (
+          <img width={720} height={360} src={heroImage} alt="" class="m-auto" />
+        )
+      }
+      <h1 class="text-4xl py-5">{title}</h1>
+      {pubDate && <time class="italic">{pubDate}</time>}
+      {
+        updatedDate && (
           <div>
-            Tags:
-            <ul
-              style="list-style: none;display: inline-flex;
-    padding-left: 0;"
-            >
-              {tags.map((t) => (
-                <li style="float: left; padding-left: 10px;">{t}</li>
-              ))}
-            </ul>
+            Last updated on <time>{updatedDate}</time>
           </div>
         )
       }
-    </section>
-    <Footer />
-  </body>
-</html>
+      <hr />
+      <slot />
+      <div class="pt-4">
+        {
+          tags && tags.length > 0 && (
+            <div>
+              <span class="">Tags:</span>
+              <ul class="list-none inline-flex pl-0 italic text-sm">
+                {tags.map((t) => (
+                  <li class="float-left pl-4">{t}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+      </div>
+    </article>
+  </main>
+</BaseLayout>
