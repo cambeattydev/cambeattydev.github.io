@@ -3,27 +3,21 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="bg-slate-700 text-gray-200">
-    <Header title={SITE_TITLE} />
-    <main class="m-auto max-w-3xl">
-      <h1 class="text-2xl py-4">Hello Reader!</h1>
-      <p>
-        Thank you for stopping by. My name is Cameron (Cam) Beatty and I have
-        been in tech since 2015 after I graduated from college with my degree in
-        computer science. Since then, I have been in many roles that have given
-        me a unique perspective on software development and technology in
-        general. This blog's main purpose is to document my learnings,
-        successes, failures, and at times random thoughts mainly inside the tech
-        space.
-      </p>
-      <!-- <h1>🧑‍🚀 Hello, Astronaut!</h1>
+<BaseLayout>
+  <main class="flex-none m-auto max-w-3xl">
+    <h1 class="text-2xl py-4">Hello Reader!</h1>
+    <p>
+      Thank you for stopping by. My name is Cameron (Cam) Beatty and I have been
+      in tech since 2015 after I graduated from college with my degree in
+      computer science. Since then, I have been in many roles that have given me
+      a unique perspective on software development and technology in general.
+      This blog's main purpose is to document my learnings, successes, failures,
+      and at times random thoughts mainly inside the tech space.
+    </p>
+    <!-- <h1>🧑‍🚀 Hello, Astronaut!</h1>
 			<p>
 				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
 				template serves as a lightweight, minimally-styled starting point for anyone looking to build
@@ -54,7 +48,5 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 					>astro-blog-template
 				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
 			</p> -->
-    </main>
-    <Footer />
-  </body>
-</html>
+  </main>
+</BaseLayout>

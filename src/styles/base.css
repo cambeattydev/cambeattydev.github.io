@@ -2,19 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-slate-700 text-gray-200;
-  }
-  h3 {
-    @apply text-2xl py-4 font-bold;
-  }
-  h4 {
-    @apply text-lg pb-5 font-bold;
-  }
-  ul {
-    @apply list-disc list-inside pb-3;
-  }
+article h3 {
+  @apply text-2xl py-4 font-bold;
+}
+article h4 {
+  @apply text-lg pb-5 font-bold;
+}
+article ul {
+  @apply list-disc list-inside pb-3;
 }
 
 body {
@@ -48,13 +43,13 @@ img {
 }
 code {
   padding: 2px 5px;
-  @apply bg-slate-500 rounded-sm;
+  @apply bg-gray-300 dark:bg-slate-700 rounded-sm;
 }
 pre {
   padding: 1rem;
 }
 pre > code {
-  all: unset;
+  all: unset !important;
 }
 blockquote {
   border: 1px solid #999;

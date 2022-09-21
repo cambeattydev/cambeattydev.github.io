@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 // Use Astro.glob() to fetch all posts, and then sort them by date.
 const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
@@ -12,58 +13,56 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
 );
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      ul {
-        list-style-type: none;
-        padding: unset;
-      }
-      ul li {
-        display: flex;
-      }
-      ul li time {
-        flex: 0 0 130px;
-        font-style: italic;
-        color: #888;
-      }
-      ul li a:visited {
-        color: #8e32dc;
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
-    <main>
-      <section class="container m-auto">
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <time datetime={post.frontmatter.pubDate}>
-                  {new Date(post.frontmatter.pubDate).toLocaleDateString(
-                    "en-us",
-                    {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    }
-                  )}
-                </time>
-                <a
-                  class="text-blue-200 visited:text-violet-400"
-                  href={post.url}
-                >
-                  {post.frontmatter.title}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-    </main>
-    <Footer />
-  </body>
-</html>
+<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+<style>
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  ul li {
+    display: flex;
+  }
+  ul li time {
+    flex: 0 0 130px;
+    font-style: italic;
+    color: #888;
+  }
+  ul li a:visited {
+    color: #8e32dc;
+  }
+</style>
+
+<BaseLayout>
+  <main class="mt-4 ml-4">
+    <section class="m-auto container">
+      <ul>
+        {
+          posts.map((post) => (
+            <li>
+              <time
+                class="dark:text-gray-200"
+                datetime={post.frontmatter.pubDate}
+              >
+                {new Date(post.frontmatter.pubDate).toLocaleDateString(
+                  "en-us",
+                  {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }
+                )}
+              </time>
+              <a
+                class="text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 dark:visited:text-blue-400"
+                href={post.url}
+              >
+                {post.frontmatter.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+  <div class="flex-grow"></div>
+</BaseLayout>
