@@ -12,6 +12,10 @@ article ul {
   @apply list-disc list-inside pb-3;
 }
 
+nav li.active {
+  @apply dark:bg-slate-700 bg-slate-300 rounded-md;
+}
+
 body {
   font-family: Verdana, sans-serif;
   margin: auto;

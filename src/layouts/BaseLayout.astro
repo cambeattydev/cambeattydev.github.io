@@ -11,7 +11,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body class="min-h-screen flex flex-col dark:bg-gray-900 dark:text-white">
-    <Header title={SITE_TITLE} client:load />
+    <Header title={SITE_TITLE} />
     <slot />
     <Footer />
     <script>
