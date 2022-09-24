@@ -1,7 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -33,7 +31,7 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
 </style>
 
 <BaseLayout>
-  <main class="mt-4 ml-4">
+  <main class="mt-4 ml-4 m-auto">
     <section class="m-auto container">
       <ul>
         {
