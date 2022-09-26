@@ -1,0 +1,43 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_TITLE } from "../config";
+---
+
+<BaseHead title={SITE_TITLE + "- Contact"} description="" />
+
+<BaseLayout>
+  <main class="m-4">
+    <section class="m-auto container">
+      <h1 class="text-4xl w-full text-center">Contact</h1>
+      <form id="contact-form">
+        <div class="mb-6">
+          <label
+            for="name"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >Name</label
+          >
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
+        <button
+          class="mt-5 g-recaptcha text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+          data-sitekey="6LfL3y0iAAAAAIZZv8fZcnOSmoRIK_I9HnV3pXDO"
+          data-callback="onSubmit"
+          data-badge="inline"
+          data-action="submit">Submit</button
+        >
+      </form>
+    </section>
+  </main>
+  <div class="flex-grow"></div>
+</BaseLayout>
+<script is:inline>
+  function onSubmit(token) {
+    document.getElementById("contact-form").submit();
+  }
+</script>
