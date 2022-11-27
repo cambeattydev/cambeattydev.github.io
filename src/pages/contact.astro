@@ -35,6 +35,7 @@ import { SITE_TITLE } from "../config";
             >Name</label
           >
           <input
+            required
             type="text"
             name="name"
             id="name"
@@ -48,7 +49,8 @@ import { SITE_TITLE } from "../config";
             >Email</label
           >
           <input
-            type="text"
+            required
+            type="email"
             name="email"
             id="email"
             class="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -58,9 +60,10 @@ import { SITE_TITLE } from "../config";
           <label
             for="name"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >Description</label
+            >Message</label
           >
           <textarea
+            required
             name="description"
             id="description"
             class="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -68,47 +71,115 @@ import { SITE_TITLE } from "../config";
         </div>
         <button
           class="w-full mt-5 g-recaptcha text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800"
-          data-sitekey="6LfL3y0iAAAAAIZZv8fZcnOSmoRIK_I9HnV3pXDO"
-          data-callback="onSubmit"
-          data-badge="inline"
-          data-action="submit">Submit</button
+          type="submit">Submit</button
         >
       </form>
     </section>
   </main>
   <div class="flex-grow"></div>
+  <div
+    id="toast-success"
+    class="flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 hidden"
+    role="alert"
+  >
+    <div
+      class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200"
+    >
+      <svg
+        aria-hidden="true"
+        class="w-5 h-5"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+        ><path
+          fill-rule="evenodd"
+          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+          clip-rule="evenodd"></path>
+      </svg>
+      <span class="sr-only">Check icon</span>
+    </div>
+    <div class="ml-3 text-sm font-normal">Contact sent sucessfully</div>
+    <button
+      type="button"
+      class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+      data-dismiss-target="#toast-success"
+      aria-label="Close"
+    >
+      <span class="sr-only">Close</span>
+      <svg
+        aria-hidden="true"
+        class="w-5 h-5"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+        ><path
+          fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
 </BaseLayout>
 <script is:inline>
-  function onSubmit(token) {
-    const form = document.getElementById("contact-form");
-    const spinner = document.getElementById("spinner");
-    form.classList.add("hidden");
-    spinner.classList.remove("hidden");
+  document
+    .getElementById("contact-form")
+    .addEventListener("submit", function (e) {
+      onSubmit(e);
+    });
 
-    const formData = new FormData(form);
-    fetch(
-      "https://prod2-20.centralus.logic.azure.com:443/workflows/9b5ba65380b0443e9d6236af7c74ad15/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=haN6L3CQ76P2nY6B65oOL2joIlw7m--HX02KSQVLPs0",
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
-      .then((res) => {
-        if (res.ok) {
-          //TODO don't redirect
-          window.location = res.headers.get("location");
-          showForm();
-        }
-      })
-      .catch((res) => {
-        console.log(res);
-        showForm();
-      });
+  function onSubmit(e) {
+    e.preventDefault();
+    grecaptcha.ready(function () {
+      grecaptcha
+        .execute("6LfL3y0iAAAAAIZZv8fZcnOSmoRIK_I9HnV3pXDO", {
+          action: "submit",
+        })
+        .then(function (token) {
+          const form = document.getElementById("contact-form");
+          const valid = form.checkValidity();
+          if (!valid) return;
+          const spinner = document.getElementById("spinner");
+          form.classList.add("hidden");
+          spinner.classList.remove("hidden");
+
+          const formData = new FormData(form);
+          formData.append("g-recaptcha-response", token);
+          fetch(
+            "https://prod2-20.centralus.logic.azure.com:443/workflows/9b5ba65380b0443e9d6236af7c74ad15/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=haN6L3CQ76P2nY6B65oOL2joIlw7m--HX02KSQVLPs0",
+            {
+              method: "POST",
+              body: formData,
+            }
+          )
+            .then((res) => {
+              if (res.ok) {
+                document.getElementById("contact-form").reset();
+                showForm();
+                showToast();
+              } else {
+                throw Error(res);
+              }
+            })
+            .catch((res) => {
+              console.log(res);
+              showForm();
+            });
+        });
+    });
   }
+
   function showForm() {
     const form = document.getElementById("contact-form");
     const spinner = document.getElementById("spinner");
     spinner.classList.add("hidden");
     form.classList.remove("hidden");
+  }
+
+  function showToast() {
+    const toast = document.getElementById("toast-success");
+    toast.classList.remove("hidden");
+    setTimeout(() => {
+      toast.classList.add("hidden");
+    }, 3000);
   }
 </script>
