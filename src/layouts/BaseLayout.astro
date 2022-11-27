@@ -15,7 +15,17 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
     <slot />
     <Footer />
     <script>
+      import { ApplicationInsights } from "@microsoft/applicationinsights-web";
       import "flowbite";
+
+      const appInsights = new ApplicationInsights({
+        config: {
+          connectionString:
+            "InstrumentationKey=d2485b27-5d16-41f9-bee4-7fd9623eb218;IngestionEndpoint=https://centralus-2.in.applicationinsights.azure.com/;LiveEndpoint=https://centralus.livediagnostics.monitor.azure.com/",
+        },
+      });
+      appInsights.loadAppInsights();
+      appInsights.trackPageView();
     </script>
   </body>
 </html>
