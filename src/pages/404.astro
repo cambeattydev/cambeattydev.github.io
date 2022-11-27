@@ -1,0 +1,17 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_TITLE } from "../config";
+---
+
+<BaseHead title={SITE_TITLE + " - 404"} description="Not found" />
+
+<BaseLayout>
+  <main class="mx-auto max-w-3xl grow flex-col">
+    <h1 class="mt-8 text-5xl font-bold text-center pb-6">404 - Not Found</h1>
+    <img
+      class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+      src="404.jpg"
+    />
+  </main>
+</BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import BaseLayout from "./BaseLayout.astro";
+import { SITE_TITLE } from "../config";
 
 export interface Props {
   content: {
@@ -17,7 +18,7 @@ const {
 } = Astro.props;
 ---
 
-<BaseHead title={title} description={description} />
+<BaseHead title={SITE_TITLE + " - " + title} description={description} />
 <BaseLayout>
   <style>
     hr {
