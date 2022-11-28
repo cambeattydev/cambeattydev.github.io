@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import CardWithImage from "../components/blog/cardWithImage.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -31,35 +32,11 @@ const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
 </style>
 
 <BaseLayout>
-  <main class="mt-4 ml-4 m-auto">
-    <section class="m-auto container">
-      <ul>
-        {
-          posts.map((post) => (
-            <li>
-              <time
-                class="dark:text-gray-200"
-                datetime={post.frontmatter.pubDate}
-              >
-                {new Date(post.frontmatter.pubDate).toLocaleDateString(
-                  "en-us",
-                  {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  }
-                )}
-              </time>
-              <a
-                class="text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 dark:visited:text-blue-400"
-                href={post.url}
-              >
-                {post.frontmatter.title}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+  <main class="mt-4 m-auto w-full">
+    <section class="mb-4">
+      <div class="flex justify-center flex-wrap flex-grow gap-4 w-full">
+        {posts.map((post) => <CardWithImage post={post} />)}
+      </div>
     </section>
   </main>
   <div class="flex-grow"></div>

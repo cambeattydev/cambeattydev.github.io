@@ -1,9 +1,10 @@
 ---
 layout: ../../layouts/BlogPost.astro
 title: Application Insights and OpenTelemetry
+description: "High level look at application insgihts vs OpenTelemetry"
 author: "Cam Beatty"
 pubDate: 'September 07 2022'  
-heroImage: "/placeholder-hero.jpg"
+heroImage: "/stock/header-1.jpg"
 tags:
 - Logging
 - Azure

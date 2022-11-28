@@ -1,12 +1,13 @@
 ---
 layout: ../../layouts/BlogPost.astro
 title: "Ilograph"
+description: "A quick look and light endorcement for a new architecture design program"
 author: "Cam Beatty"
 tags:
 - Diagrams
 - Architecture 
 pubDate: 'August 30 2022'
-heroImage: "/placeholder-hero.jpg"
+heroImage: "/stock/header-2.jpg"
 ---
 
 As a solution architect, I tend to have to build process flows and diagrams depicting systems and how they interact with each other. I have tried a few different solutions that are available out there with limited success. I find that my biggest issue with existing solutions is they allow too much customization. I get bogged down in the minor details of how these visualizations look and quickly get stuck in a cycle of moving elements around to make everything look pretty. You may not suffer from this same issue, and if that is the case, then you can happily continue using other tools like [Visio](https://www.microsoft.com/en-us/microsoft-365/visio/flowchart-software), [Lucid](https://lucid.co/), or [Draw.io which was rebranded as diagrams.net](https://app.diagrams.net/) to name a few. If you struggle with a similar issue with those platforms, I would recommend [Ilograph](https://www.ilograph.com/). 

@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = "Cam Beatty";
 export const SITE_DESCRIPTION = "Welcome to my website!";
+export const DEFAULT_BLOG_IMAGE = "/stock/placeholder-hero.jpg";
