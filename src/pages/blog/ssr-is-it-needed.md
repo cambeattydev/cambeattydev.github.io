@@ -1,11 +1,13 @@
 ---
 layout: ../../layouts/BlogPost.astro
 title: "SSR, is it needed?"
+description: "Why is SSR so hot right now and should you care?"
 author: "Cam Beatty"
 tags:
 - SPA
 - Front End  
 pubDate: 'September 15 2022'
+heroImage: "/stock/header-3.jpg"
 ---
 ### Introduction
 I have been working on expanding my knowledge outside of the .Net world, which first led me to the node stack, primarily because of the Youtube algorithm. The node stack is valuable from the web development perspective since both the front and back end can be written in javascript or typescript. This allows for the natural progression of rendering existing spa frameworks on the back end and sending the result to the user where the SPA(single page application) framework eventually takes over, otherwise known as Server Side Rendering (SSR). Does rendering the HTML on the server sound familiar? 
